@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --search: #E6E6E6;
+}
+
+/* FONTS */
+
+@font-face {
+  font-family: "Nunito";
+  src: url('/fonts/Nunito_VariableFont_whgt.woff2') format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ChangaOne";
+  src: url('/fonts/ChangaOne-Regular.woff2') format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JosefinSans";
+  src: url('/fonts/JosefinSans-VariableFont_wght.woff2') format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url('/fonts/Outfit-VariableFont_wght.woff2') format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Varela";
+  src: url('/fonts/VarelaRound-Regular.woff2') format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* OTHERS */
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  --color-search: #E6E6E6;
+  --color-c1-white: #EDE9E6;
+  --color-c1-brown: #C9996B;
+  --color-c1-darkbrown: #5C4F4A;
+  --color-c1-darkteal: #5C766D;
+
+  /* FONTS */
+
+  --font-nunito: "Nunito", sans-serif;
+  --font-changa: "ChangaOne", sans-serif;
+  --font-josefin-sans: "JosefinSans", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+  --font-valera: "Valera", sans-serif;
+}
+
+/* DARK MODE */
+
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-background: #0a0a0a;
+    --color-foreground: #ededed;
+  }
+}
+
+body {
+  /* background: var(--color-background);
+  color: var(--color-foreground); */
+  font-family: inherit;
+}
