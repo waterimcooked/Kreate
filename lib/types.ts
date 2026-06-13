@@ -1,14 +1,20 @@
 // this is where types can be written and exported for use. this TYPESCRIPT file specifically exports types
 
 import { table } from "console"
+import { Dispatch, SetStateAction } from "react"
 
 export type _SearchBar = {
     placeholder?: string,
+    className?: string,
+    searchInput: string,
+    setSearchInput: Dispatch<SetStateAction<string>>
 }
 
-export type _Navbar = {
-    profileImg?: string,
-    isLandingPage?: boolean,
+export type _AppProps = {
+    searchInput: string,
+    setSearchInput: Dispatch<SetStateAction<string>>,
+    selectedCategory: string,
+    setSelectedCategory: Dispatch<SetStateAction<string>>
 }
 
 export type _DiscoverFeed = {

@@ -1,14 +1,14 @@
 "use client"
 
 import Hero from "@/components/Hero"
-import Navbar from "./Navbar";
+import LandingNavbar from "./LandingNavbar";
 
 // LANDING PAGE
 
 export default function LandingPage() {
   return (
     <div>
-      <Navbar isLandingPage={true}/>
+      <LandingNavbar/>
       <Hero/>
     </div>
   );

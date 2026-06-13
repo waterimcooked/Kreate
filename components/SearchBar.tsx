@@ -1,14 +1,27 @@
 "use client"
 
 import { _SearchBar } from "@/lib/types"
-import { useState } from "react"
+import { useState, Dispatch, SetStateAction } from "react"
 
-export default function SearchBar({ placeholder, className = "" }: _SearchBar & { className?: string }) {
-    const [inputText, setInputText] = useState("")
+// <SearchBar
+// placeholder="searching for something else?"
+// searchInput={searchInput}
+// setSearchInput={setSearchInput}
+
+export default function SearchBar(
+    
+    {
+        placeholder,
+        className = "",
+        searchInput, 
+        setSearchInput
+    } : _SearchBar) {
+
     const [isFocused, setIsFocused] = useState(false)
+
     function updateInputText(e: any) {
         let text = e.target.value
-        setInputText(text)
+        setSearchInput(text)
     }
     return (
         <div className={`w-full flex flex-row items-center gap-2 p-2 bg-gray-200 rounded-md ${className}`}>
@@ -19,7 +32,7 @@ export default function SearchBar({ placeholder, className = "" }: _SearchBar & 
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder={ placeholder || "empty" }
-            value={ inputText }
+            value={ searchInput }
             className="text-gray-800 w-full outline-none border-none"
             />
         </div>

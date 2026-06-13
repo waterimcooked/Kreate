@@ -8,9 +8,11 @@ const isLoggedIn : boolean = true
 
 // COMPONENTS
 
-import Navbar from "@/components/Navbar"
+import AppNavbar from "@/components/AppNavbar";
+import LandingNavbar from "@/components/LandingNavbar";
 import Sidebar from "@/components/Sidebar";
 import LandingPage from "@/components/LandingPage";
+import ClientLayout from "@/components/ClientLayout";
 
 // GO
 
@@ -47,6 +49,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  // const [searchInput, setSearchInput] = useState("")
+  // const [selectedCategory, setSelectedCategory] = useState("")
+
   return (
     <html
       lang="en"
@@ -55,17 +61,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
           <main>
             
-            { isLoggedIn? <div>
-              <div className="flex min-h-screen">
-                <Sidebar />
-                <div className="flex-1 flex flex-col">
-                  <Navbar isLandingPage={false} />
-                  <div className="flex-1 ml-18 mt-28">
-                    {children}
-                  </div>
-                </div>
-              </div>
-            </div> :
+            { isLoggedIn? <ClientLayout>{children}</ClientLayout> :
               <LandingPage/>
             }
 
