@@ -4,12 +4,6 @@ import Image from "next/image"
 import Button from "./Button"
 import { useRouter } from "next/navigation";
 
-// import Discover from "@/public/discover.svg"
-// import Home from "@/public/home.svg"
-// import Messages from "@/public/messages.svg"
-// import Upload from "@/public/upload.svg"
-// import Profile from "@/public/profile.svg"
-
 export default function Sidebar() {
     const router = useRouter();
 
@@ -28,8 +22,8 @@ export default function Sidebar() {
                     <img src={"/home.svg"} alt="home" width={24} height={24} />
                 </Button>
 
-                <Button className="flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg" onClick={() => {goTo("/discover")}}>
-                    <img src={"/discover.svg"} alt="discover" width={24} height={24} />
+                <Button className="flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg" onClick={() => {goTo("/browse")}}>
+                    <img src={"/search.svg"} alt="browse" width={24} height={24} />
                 </Button>
 
                 <Button className="flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg">

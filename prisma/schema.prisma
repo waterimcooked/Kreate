@@ -1,0 +1,30 @@
+datasource db {
+  provider = "postgresql"
+  
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Artist {
+  id               Int     @id @default(autoincrement())
+  name             String
+  avatar           String
+  bio              String?
+  rating           Float
+  ratingCount      Int
+  priceMin         Int
+  priceMax         Int
+  highlightedPreview String
+  createdAt        DateTime @default(now())
+  portfolio        PortfolioItem[]
+}
+
+model PortfolioItem {
+  id       Int     @id @default(autoincrement())
+  artistId Int
+  image    String
+  title    String
+  artist   Artist  @relation(fields: [artistId], references: [id])
+}

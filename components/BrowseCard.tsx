@@ -23,14 +23,5 @@ export default function DiscoverCard (props: _DiscoverCard) {
                     </button>
             </div>
         </div>
-        
-
-        // <div className="h-64 w-full p-2 m-2 rounded shadow">
-        //     <img src={ `${props.highlightedPreview}` } alt="" className="object-cover w-full h-full"/>
-        //     <div>
-        //         <h1> { props.name } </h1>
-        //         <ProfileIcon {...props}/>
-        //     </div>
-        // </div>
     )
 }

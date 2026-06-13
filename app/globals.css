@@ -53,6 +53,27 @@
   --color-c1-brown: #C9996B;
   --color-c1-darkbrown: #5C4F4A;
   --color-c1-darkteal: #5C766D;
+  --color-mocha-50: #FAF7F2;
+  --color-mocha-100: #F5EDE3;
+  --color-mocha-200: #E8DCC8;
+  --color-mocha-300: #D9C4A8;
+  --color-mocha-400: #C9996B;
+  --color-mocha-500: #B8825D;
+  --color-mocha-600: #A66E4A;
+  --color-mocha-700: #8B543F;
+  --color-mocha-800: #6B3E2D;
+  --color-mocha-900: #513020;
+
+  --color-cozy-50: #FDF8F3;
+  --color-cozy-100: #FCF1E6;
+  --color-cozy-200: #F9E4CC;
+  --color-cozy-300: #F5D1A8;
+  --color-cozy-400: #EDB884;
+  --color-cozy-500: #E39B6D;
+  --color-cozy-600: #D67E4F;
+  --color-cozy-700: #C25C2F;
+  --color-cozy-800: #944520;
+  --color-cozy-900: #6B3217;
 
   /* FONTS */
 

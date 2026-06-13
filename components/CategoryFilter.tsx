@@ -2,7 +2,7 @@ import Button from "./Button"
 
 export default function CategoryFilter() {
     return (
-        <div className="flex justify-start items-start w-full">
+        <div className="flex justify-center items-center w-full">
             <Button className="m-2 p-2 pl-8 pr-8 rounded-xl bg-gray-200 font-outfit">
                 Art
             </Button>

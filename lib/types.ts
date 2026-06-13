@@ -36,6 +36,20 @@ export type _DiscoverCard = {
     }[]                                  // keep it short in UI (map().slice(0, 2))
 }
 
+export type _HomeCard = {
+    id: string                           // unique creator id
+    name: string                         // "dani"
+    avatar?: string                      // "/avatar.jpg"
+    rating?: number                      // 4.8 (quick trust signal)
+    ratingCount?: number
+    highlightedPreview?: string          // an image
+    portfolio?: {                        // 1-2 showcase pieces only
+        id: string
+        image: string
+        title: string
+    }[]
+}
+
 export type _CreatorCard = {
     id: string                           // unique creator id
     name: string                         // "dani"
