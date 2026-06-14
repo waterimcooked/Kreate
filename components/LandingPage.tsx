@@ -1,15 +1,17 @@
 "use client"
 
-import Hero from "@/components/Hero"
+import LandingHero from "./LandingHero";
 import LandingNavbar from "./LandingNavbar";
+
+import React from "react";
 
 // LANDING PAGE
 
-export default function LandingPage() {
+export default function LandingPage({ children } : { children: React.ReactNode }) {
   return (
-    <div>
+    <div className="bg-cozy-50">
       <LandingNavbar/>
-      <Hero/>
+      {children ? children : <LandingHero/>}
     </div>
   );
 }

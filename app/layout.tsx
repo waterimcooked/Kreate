@@ -4,7 +4,7 @@ import "./globals.css";
 
 // HARC CODED
 
-const isLoggedIn : boolean = true
+const isLoggedIn : boolean = false
 
 // COMPONENTS
 
@@ -61,8 +61,10 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
           <main>
             
-            { isLoggedIn? <ClientLayout>{children}</ClientLayout> :
-              <LandingPage/>
+            {isLoggedIn ? 
+              <ClientLayout>{children}</ClientLayout>
+              :
+              <LandingPage>{children}</LandingPage>
             }
 
           </main>

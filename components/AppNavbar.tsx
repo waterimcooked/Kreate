@@ -6,15 +6,11 @@ import { Dispatch, SetStateAction } from "react"
 import { _AppProps } from "@/lib/types"
 
 export default function AppNavbar(
-    
     {
         searchInput, 
         setSearchInput,
-
-    } : _AppProps
-
-) {
-
+    } : _AppProps) {
+        
     return (
        <div className="fixed top-0 left-18 right-0 h-28 bg-white flex flex-col items-center p-4 shadow z-10 ">
                 <SearchBar

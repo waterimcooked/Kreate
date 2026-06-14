@@ -4,7 +4,6 @@ export default function Button(
 ) 
 
 {
-
     function fireClickedEvent(e: any) {
         onClick?.(e)
         console.log("CLICKED")

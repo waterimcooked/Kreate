@@ -1,30 +1,55 @@
 datasource db {
   provider = "postgresql"
-  
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model Artist {
-  id               Int     @id @default(autoincrement())
-  name             String
-  avatar           String
-  bio              String?
-  rating           Float
-  ratingCount      Int
-  priceMin         Int
-  priceMax         Int
-  highlightedPreview String
-  createdAt        DateTime @default(now())
-  portfolio        PortfolioItem[]
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String   @unique
+  avatar    String?
+  bio       String?
+  createdAt DateTime @default(now())
+  
+  commissions Commission[]
+  orders      Order[]
+  clicks      Click[]
 }
 
-model PortfolioItem {
-  id       Int     @id @default(autoincrement())
-  artistId Int
-  image    String
-  title    String
-  artist   Artist  @relation(fields: [artistId], references: [id])
+model Commission {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  image       String
+  price       Int
+  tags        String   // "illustration,character,digital" comma-separated
+  creatorId   String
+  creator     User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  
+  orders      Order[]
+  clicks      Click[]
+}
+
+model Order {
+  id            String   @id @default(cuid())
+  commissionId  String
+  commission    Commission @relation(fields: [commissionId], references: [id], onDelete: Cascade)
+  buyerId       String
+  buyer         User @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+  status        String   @default("pending") // pending, in-progress, completed, disputed
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Click {
+  id            String   @id @default(cuid())
+  commissionId  String
+  commission    Commission @relation(fields: [commissionId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now())
 }
