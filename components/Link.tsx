@@ -7,11 +7,11 @@ import { Dispatch, SetStateAction } from "react";
 export default function Link({ 
     children, 
     className = "", 
-    onClick 
+    onClick
 }: { 
     children: React.ReactNode, 
     className?: string, 
-    onClick: () => void
+    onClick?: () => void
  }) {
     const [isMouseOn, setMouseOn] = useState<boolean>(false)
 

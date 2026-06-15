@@ -2,6 +2,7 @@
 
 import LandingHero from "./LandingHero";
 import LandingNavbar from "./LandingNavbar";
+import Sidebar from "./Sidebar";
 
 import React from "react";
 

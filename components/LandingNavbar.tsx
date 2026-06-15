@@ -28,7 +28,7 @@ export default function LandingNavbar() {
 
                 <div className="w-full mr-8 flex justify-end justify-between" id="RIGHT">
                     <Button onClick={ () => { goTo("/login") }} className="bg-gray-200 font-outfit shadow rounded mr-2 ml-2 p-2"><h1 className="ml-2 mr-2">LOG IN</h1></Button>
-                    <Button onClick={ () => { goTo("/sign") }} className="bg-mocha-400 font-outfit shadow rounded mr-2 ml-2 p-2"><h1 className="ml-2 mr-2">SIGN UP</h1></Button>
+                    <Button onClick={ () => { goTo("/register") }} className="bg-mocha-400 font-outfit shadow rounded mr-2 ml-2 p-2"><h1 className="ml-2 mr-2">SIGN UP</h1></Button>
                 </div>
             </div>
         </div>
