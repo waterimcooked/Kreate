@@ -1,22 +1,9 @@
-datasource db {
-  provider = "postgresql"
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String   @unique
-  avatar    String?
-  bio       String?
-  createdAt DateTime @default(now())
-  
-  commissions Commission[]
-  orders      Order[]
-  clicks      Click[]
+datasource db {
+  provider = "postgresql"
 }
 
 model Commission {
@@ -25,31 +12,42 @@ model Commission {
   description String
   image       String
   price       Int
-  tags        String   // "illustration,character,digital" comma-separated
+  tags        String
   creatorId   String
-  creator     User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
-  
-  orders      Order[]
   clicks      Click[]
+  creator     Users    @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  orders      Order[]
 }
 
 model Order {
-  id            String   @id @default(cuid())
-  commissionId  String
-  commission    Commission @relation(fields: [commissionId], references: [id], onDelete: Cascade)
-  buyerId       String
-  buyer         User @relation(fields: [buyerId], references: [id], onDelete: Cascade)
-  status        String   @default("pending") // pending, in-progress, completed, disputed
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String     @id @default(cuid())
+  commissionId String
+  buyerId      String
+  status       String     @default("pending")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  buyer        Users      @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+  commission   Commission @relation(fields: [commissionId], references: [id], onDelete: Cascade)
 }
 
 model Click {
-  id            String   @id @default(cuid())
-  commissionId  String
-  commission    Commission @relation(fields: [commissionId], references: [id], onDelete: Cascade)
-  userId        String
-  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt     DateTime @default(now())
+  id           String     @id @default(cuid())
+  commissionId String
+  userId       String
+  createdAt    DateTime   @default(now())
+  commission   Commission @relation(fields: [commissionId], references: [id], onDelete: Cascade)
+  user         Users      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Users {
+  id          String       @id(map: "User_pkey")
+  email       String       @unique(map: "User_email_key")
+  name        String
+  avatar      String?
+  bio         String?
+  createdAt   DateTime     @default(now())
+  clicks      Click[]
+  commissions Commission[]
+  orders      Order[]
 }

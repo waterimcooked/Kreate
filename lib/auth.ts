@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken"
+import { _registrationData } from "./types"
 
-export function createToken(userId : string) {
+export async function createToken(userId : string) {
     const token = jwt.sign(
         { userId }, 
         process.env.JWT_SECRET!, 
@@ -12,7 +13,7 @@ export function createToken(userId : string) {
     return token    
 }
 
-export function verifyToken(token : string) {
+export async function verifyToken(token : string) {
     if (!process.env.JWT_SECRET) {
     throw new Error('JWT_SECRET not found')
   }
@@ -22,5 +23,22 @@ export function verifyToken(token : string) {
     return isVerified
   } catch (err) {
     return null
+  }
+}
+
+// user related
+
+export async function registerUser( payload : _registrationData) {
+  try {
+    const res = await fetch('/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+
+    console.log(res)
+
+  } catch (error) {
+    
   }
 }

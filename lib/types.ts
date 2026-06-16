@@ -70,3 +70,10 @@ export type _CreatorCard = {
     }[]
 }
 
+// api related
+
+export type _registrationData = {
+    name: string,
+    email: string,
+    password: string,
+}

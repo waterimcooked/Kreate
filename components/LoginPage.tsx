@@ -23,7 +23,6 @@ export default function LoginPage() {
                 </h1>
 
                 <div className="flex justify-center w-168 h-102 bg-mocha-600 rounded shadow mt-8 p-4" id="login thing">
-
                     <div className="flex flex-col h-full w-150 mr-2" id="left">
                         <div className="w-full h-24 p-4" id="email-part">
                             <h1 className="font-outfit text-mocha-900">Email or Username <span className="text-mocha-200">*</span> </h1>
