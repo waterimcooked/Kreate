@@ -41,13 +41,14 @@ model Click {
 }
 
 model Users {
-  id          String       @id(map: "User_pkey")
-  email       String       @unique(map: "User_email_key")
-  name        String
-  avatar      String?
-  bio         String?
-  createdAt   DateTime     @default(now())
-  clicks      Click[]
-  commissions Commission[]
-  orders      Order[]
+  id           String       @id @default(uuid()) @map("id")
+  email        String       @unique(map: "User_email_key")
+  name         String
+  avatar       String?
+  bio          String?
+  date_created DateTime     @default(now())
+  password     String?
+  clicks       Click[]
+  commissions  Commission[]
+  orders       Order[]
 }

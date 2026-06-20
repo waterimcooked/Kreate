@@ -26,7 +26,7 @@ export default function Sidebar() {
                     <img src={"/search.svg"} alt="browse" width={24} height={24} />
                 </Button>
 
-                <Button className="flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg">
+                <Button className="flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg" onClick={() => {goTo("/upload")}}>
                     <img src={"/upload.svg"} alt="upload" width={24} height={24} />
                 </Button>
 
@@ -34,10 +34,9 @@ export default function Sidebar() {
                     <img src={"/messages.svg"} alt="messages" width={24} height={24} />
                 </Button>
 
-                <Button className="flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg">
+                <Button className="flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg" onClick={() => {goTo("/profile")}}>
                     <img src={"/profile.svg"} alt="profile" width={24} height={24} />
                 </Button>
-
             </main>
         </div>
     )

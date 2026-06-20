@@ -114,15 +114,31 @@ export default function HomePage() {
                     </div>
                 </div>
 
-                <div className="flex justify-center h-90 p-4 w-full bg-mocha-200">
+                <div className="flex flex-col items-center justify-center p-4 w-full bg-mocha-200">
                     <h1 className="font-outfit text-xl text-mocha-600 ">
-                        Art
+                        recent commissions
                     </h1>
+
+                    <h1 className="font-outfit text-sm text-mocha-300/100">
+                        - maybe these will make you catch a glimpse? -
+                    </h1>
+
+                    <div className="flex flex-row mt-4">
+                        { data.map((creator: _HomeCard) => {
+                            return (
+                                <HomeCard key={creator.id} {...creator}/>
+                            )
+                        })}
+                    </div>
                 </div>
 
-                <div className="flex justify-center h-90 p-4 w-full bg-mocha-300">
+                <div className="flex flex-col items-center justify-center p-4 w-full bg-mocha-300">
                     <h1 className="font-outfit text-xl text-mocha-600 ">
-                        Developing
+                        upcoming kreators
+                    </h1>
+
+                    <h1 className="font-outfit text-sm text-mocha-300/100">
+                        - users that may have a chance soon -
                     </h1>
                 </div>
             </div>

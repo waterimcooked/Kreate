@@ -1,3 +1,5 @@
+console.log('🔥 PRISMA.TS IS RUNNING RIGHT NOW')
+
 import { PrismaClient } from '@prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
 
@@ -10,5 +12,8 @@ export const prisma =
       connectionString: process.env.DATABASE_URL,
     }),
   })
+
+console.log('✅ Prisma object created:', prisma ? 'EXISTS' : 'UNDEFINED')
+console.log('✅ Prisma.user exists:', prisma?.user ? 'YES' : 'NO')
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma

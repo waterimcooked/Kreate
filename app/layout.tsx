@@ -4,7 +4,7 @@ import "./globals.css";
 
 // HARC CODED
 
-const isLoggedIn : boolean = false
+const isLoggedIn : boolean = true
 
 // COMPONENTS
 
@@ -44,7 +44,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -60,13 +59,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
           <main>
-            
-            {isLoggedIn ? 
-              <ClientLayout>{children}</ClientLayout>
-              :
-              <LandingPage>{children}</LandingPage>
-            }
-
+            <ClientLayout>{children}</ClientLayout>
           </main>
       </body>
     </html>

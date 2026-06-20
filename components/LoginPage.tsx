@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Button from "./Button"
-import Link from "./Link"
+import Link from "next/link"
 
 import { useRouter } from "next/navigation"
 
@@ -10,6 +10,7 @@ export default function LoginPage() {
     const router = useRouter()
 
     function redirectToRegister() {
+        console.log("redirected to register")
         router.push("/register")
     }
 
@@ -43,14 +44,14 @@ export default function LoginPage() {
 
                             <div className="mt-8 flex flex-col justify-center items-center">
                                 <h1 className="font-outfit text-mocha-900">
-                                no account yet? <span> <Link className="select-none cursor-pointer text-red-100 font-bold text-center" onClick={redirectToRegister}>register</Link>
+                                no account yet? <span> <Link className="select-none cursor-pointer text-red-100 font-bold text-center" href={"/register"}>register</Link>
                                 </span>
                                     
                             </h1>
 
                             <h1 className="font-outfit text-mocha-900">
                                 forgot your password? <span>
-                                    <Link className="select-none cursor-pointer text-red-100 font-bold text-center" onClick={redirectToRegister}>email verification</Link>
+                                    <Link className="select-none cursor-pointer text-red-100 font-bold text-center" href={"/register"}>email verification</Link>
                                 </span>
                             </h1>
                             </div>

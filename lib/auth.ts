@@ -1,5 +1,26 @@
 import jwt from "jsonwebtoken"
 import { _registrationData } from "./types"
+import { NextResponse } from "next/server"
+
+async function verifyEmail(email: string) {
+  const res = await fetch(`/api/users?type=single&column=email&value=${email}`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  })
+
+  console.log(res)
+
+  if (res.ok) {
+    return {
+      available: false
+    }
+
+  } else {
+    return {
+      available: true
+    }
+  }
+}
 
 export async function createToken(userId : string) {
     const token = jwt.sign(
@@ -8,7 +29,7 @@ export async function createToken(userId : string) {
         { expiresIn: process.env.JWT_EXPIRATION_DATE || '7d' }
     )
 
-    console.log(token)
+    console.log("created token: ", token)
 
     return token    
 }
@@ -23,22 +44,5 @@ export async function verifyToken(token : string) {
     return isVerified
   } catch (err) {
     return null
-  }
-}
-
-// user related
-
-export async function registerUser( payload : _registrationData) {
-  try {
-    const res = await fetch('/api/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-
-    console.log(res)
-
-  } catch (error) {
-    
   }
 }

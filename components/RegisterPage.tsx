@@ -3,8 +3,6 @@
 import Button from "./Button"
 import Link from "./Link"
 import { useState } from "react"
-import { registerUser } from "@/lib/auth"
-import { register } from "module"
 
 export default function RegisterPage() {
     const [name, setName] = useState("")
@@ -29,9 +27,23 @@ export default function RegisterPage() {
     async function handleRegister() {
         let payload = { name, email, password }
 
-        try {
-            const res = registerUser(payload)
+        console.log("ooo yep we're abt to register yeah")
 
+        try {
+            const res = await fetch('/api/users', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+
+            const data = await res.json()
+
+            if (data.success) {
+                console.log("YOOO WE GOT IT, SETTING AUTH_TOKEN: " + data.token)
+                localStorage.setItem("auth_token", data.token)
+            } else {
+                console.log("error.")
+            }
         } catch (error) {
             console.log("couldn't register user: " + error)
         }
