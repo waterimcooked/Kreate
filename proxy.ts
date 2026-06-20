@@ -11,6 +11,7 @@ export function proxy(request: NextRequest) {
      try {
         const res = verify(token, process.env.JWT_SECRET!)
 
+
         
         console.log("user is logged in")
         return NextResponse.next()
