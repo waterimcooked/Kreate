@@ -86,7 +86,7 @@ export default function HomePage() {
     return (
         <section id="Home">
             <div className="flex flex-col justify-center items-center">
-                <div className="flex flex-col justify-center items-center h-90">
+                <div className="flex flex-col justify-center items-center h-90 w-full bg-mocha-50">
                     <h1 className="text-5xl font-nunito font-black text-orange-800">
                         search for artists
                     </h1>

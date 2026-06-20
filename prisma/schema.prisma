@@ -41,13 +41,14 @@ model Click {
 }
 
 model Users {
-  id           String       @id @default(uuid()) @map("id")
+  id           String       @id(map: "User_pkey") @default(uuid()) @map("id")
   email        String       @unique(map: "User_email_key")
   name         String
   avatar       String?
   bio          String?
   date_created DateTime     @default(now())
   password     String?
+  handle       String       @unique
   clicks       Click[]
   commissions  Commission[]
   orders       Order[]

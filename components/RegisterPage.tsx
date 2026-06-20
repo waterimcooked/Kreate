@@ -3,11 +3,18 @@
 import Button from "./Button"
 import Link from "./Link"
 import { useState } from "react"
+import { register } from "@/lib/api"
 
 export default function RegisterPage() {
+    const [handle, setHandle] = useState("")
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    function handleHandle(e: any) {
+        let text = e.target.value
+        setHandle(text)
+    }
 
     function handleName(e: any) {
         let text = e.target.value
@@ -24,29 +31,8 @@ export default function RegisterPage() {
         setPassword(text)
     }
 
-    async function handleRegister() {
-        let payload = { name, email, password }
-
-        console.log("ooo yep we're abt to register yeah")
-
-        try {
-            const res = await fetch('/api/users', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            })
-
-            const data = await res.json()
-
-            if (data.success) {
-                console.log("YOOO WE GOT IT, SETTING AUTH_TOKEN: " + data.token)
-                localStorage.setItem("auth_token", data.token)
-            } else {
-                console.log("error.")
-            }
-        } catch (error) {
-            console.log("couldn't register user: " + error)
-        }
+    function handleRegister() {
+        register({handle, name, email, password})
     }
 
     return (
@@ -55,8 +41,13 @@ export default function RegisterPage() {
                 register right now
             </h1>
 
-            <div className="p-4 flex flex-col w-168 h-144 bg-mocha-600 mt-8 rounded shadow" id="the register page">
+            <div className="p-4 flex flex-col w-168 h-172 bg-mocha-600 mt-8 rounded shadow" id="the register page">
                 <div className="" id="the inputs">
+
+                    <div className="w-full h-24 p-4" id="email-part">
+                        <h1 className="font-outfit text-mocha-900">Handle <span className="text-mocha-200">*</span> </h1>
+                        <input type="text" className="w-full bg-mocha-400 rounded-lg p-2 font-outfit" value={handle} onChange={handleHandle} name="user" required/>
+                    </div>
 
                     <div className="w-full h-24 p-4" id="email-part">
                         <h1 className="font-outfit text-mocha-900">Name <span className="text-mocha-200">*</span> </h1>

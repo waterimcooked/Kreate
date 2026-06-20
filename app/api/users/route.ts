@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { _registrationData } from '@/lib/types'
 import { createToken } from '@/lib/auth'
 import { cookies } from 'next/headers'
+import bcrypt from 'bcryptjs'
 
 async function doubleEmailCheck(email: string) {
   const user = await prisma.users.findUnique({
@@ -17,6 +18,18 @@ async function doubleEmailCheck(email: string) {
     return {
       available: false
     }
+  }
+}
+
+async function doubleHandleCheck(handle: string) {
+  const user = await prisma.users.findUnique({
+    where: { handle: handle }
+  })
+
+  if (!user) {
+    return { available: true }
+  } else {
+    return { available: false }
   }
 }
 
@@ -83,6 +96,7 @@ export async function POST(req: NextRequest) { // create new
   console.log("yoo this is from the API, check it out:" + JSON.stringify(body))
 
     try {
+      const doubleHandle = await doubleHandleCheck(body.handle)
       const doubleEmail = await doubleEmailCheck(body.email)
       
       if (!doubleEmail.available) {
@@ -93,33 +107,48 @@ export async function POST(req: NextRequest) { // create new
             reason: "email is already used!"
           }
         )
-      } else {
-        const user = await prisma.users.create({
-          data: {
-              name: body.name,
-              email: body.email,
-              password: body.password
-          }
-        })
-
-        const token = await createToken(user.id)
-        const cookie = await cookies()
-        cookie.set('auth_token', token, {
-          httpOnly: true,
-          secure: true,
-          path: '/',
-          maxAge: 7 * 24 * 60 * 60
-        })
-
-        console.log("created a token and set for the user")
-
-        return NextResponse.json({
-          success: true,
-          userId: user.id,
-        }, {
-          status: 201,
-        })
       }
+
+      if (!doubleHandle.available) {
+        console.log("handle is already used!")
+        return NextResponse.json(
+          { 
+            success: false,
+            reason: "handle is already used!"
+          }
+        )
+      }
+
+      const hashedPassword = await bcrypt.hash(body.password, 10)
+
+      const user = await prisma.users.create({
+        data: {
+            handle: body.handle,
+            name: body.name,
+            email: body.email,
+            password: hashedPassword
+        }
+      })
+
+      const token = await createToken(user.id)
+      const cookie = await cookies()
+      cookie.set('auth_token', token, {
+        httpOnly: true,
+        secure: true,
+        path: '/',
+        maxAge: 7 * 24 * 60 * 60
+      })
+
+      console.log("created a token and set for the user")
+
+      return NextResponse.json({
+        success: true,
+        userId: user.id,
+      }, {
+        status: 201,
+      })
+
+
     } catch (error) {
         console.log("error, couldn't register this user lmao: " + error)
 

@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Button from "./Button"
 import { useRouter } from "next/navigation";
+import { logout } from "@/lib/api";
 
 export default function Sidebar() {
     const router = useRouter();
@@ -36,6 +37,10 @@ export default function Sidebar() {
 
                 <Button className="flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg" onClick={() => {goTo("/profile")}}>
                     <img src={"/profile.svg"} alt="profile" width={24} height={24} />
+                </Button>
+
+                <Button className="flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg" onClick={logout}>
+                    <h1>LOG OUT</h1>
                 </Button>
             </main>
         </div>

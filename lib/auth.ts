@@ -41,8 +41,8 @@ export async function verifyToken(token : string) {
   
   try {
     const isVerified = jwt.verify(token, process.env.JWT_SECRET)
-    return isVerified
+    return { success: true }
   } catch (err) {
-    return null
+    return { success: false }
   }
 }

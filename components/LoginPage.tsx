@@ -3,18 +3,33 @@
 import { useState } from "react"
 import Button from "./Button"
 import Link from "next/link"
+import { login } from "@/lib/api"
 
 import { useRouter } from "next/navigation"
 
 export default function LoginPage() {
-    const router = useRouter()
+    const [ handle, setHandle ] = useState("")
+    const [ password, setPassword ] = useState("")
 
-    function redirectToRegister() {
-        console.log("redirected to register")
-        router.push("/register")
+    function handleHandle(e: any) {
+        const v = e.target.value
+        setHandle(v)
     }
 
-    // bg-gray-200/50
+    function handlePassword(e: any) {
+        const v = e.target.value
+        setPassword(v)
+    }
+
+    async function handleLogin() {
+        const res = login({handle, password})
+
+        if (res.success) {
+            console.log("successfully logged in")
+        } else {
+            console.log("error.")
+        }
+    }
 
     return (
         <div className="flex flex-col justify-center w-dvw h-screen">
@@ -27,16 +42,16 @@ export default function LoginPage() {
                     <div className="flex flex-col h-full w-150 mr-2" id="left">
                         <div className="w-full h-24 p-4" id="email-part">
                             <h1 className="font-outfit text-mocha-900">Email or Username <span className="text-mocha-200">*</span> </h1>
-                            <input type="text" className="w-full bg-mocha-400 rounded-lg p-2 font-outfit" name="user" />
+                            <input type="text" value={handle} onChange={handleHandle} className="w-full bg-mocha-400 rounded-lg p-2 font-outfit" name="user" />
                         </div>
 
                         <div className="w-full h-24 p-4" id="password-part">
                             <h1 className="font-outfit text-mocha-900">Password <span className="text-mocha-200">*</span> </h1>
-                            <input type="text" className="w-full bg-mocha-400 rounded-lg p-2 font-outfit" name="password" />
+                            <input type="text" value={password} onChange={handlePassword} className="w-full bg-mocha-400 rounded-lg p-2 font-outfit" name="password" />
                         </div>
 
                         <div className="flex flex-col justify-center items-center w-full h-48 p-4 mt-8">
-                            <Button className="w-full h-12 bg-cozy-400 rounded font-outfit">
+                            <Button className="w-full h-12 bg-cozy-400 rounded font-outfit" onClick={handleLogin}>
                                 <h1 className="font-outfit text-lg text-mocha-950">
                                     Log In
                                 </h1>
