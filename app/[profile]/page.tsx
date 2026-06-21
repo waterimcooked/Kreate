@@ -1,18 +1,24 @@
 import { getProfile } from "@/lib/api"
+import NotFound from "@/components/not-found"
 
-export default async function Profile({params} : { params: { handle: string } }) {
-    const { handle } = params  // ← destructure it
-    
-    console.log(handle)
+export default async function Profile({ params }: { params: { profile: string } }) {
+    let { profile } = await params
+    profile = decodeURIComponent(profile)
 
-    // profile is a promise, you need to await it
-    const profile = await getProfile(handle)
-  
-  return (
-    <div>
-      <h1>@{profile.handle}</h1>
-      <p>{profile.bio}</p>
-      <img src={profile.avatar} />
-    </div>
-  )
+    console.log(profile)
+
+    const profileData = await getProfile({ handle: profile, })
+    if (!profileData) {
+        return (
+            <NotFound/>
+        )
+    }
+
+    return (
+        <div>
+            <h1>
+                { profileData.handle }
+            </h1>
+        </div>
+    )
 }

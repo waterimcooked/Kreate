@@ -9,19 +9,26 @@ export async function POST(req: NextRequest) {
     const body : _loginData = await req.json()
 
     try {
-        const user = await prisma.users.findFirst({
-            where: { handle: body.handle }
+        const profile = await prisma.profiles.findUnique({
+            where: {handle: body.handle},
+            include: { user: true }
         })
 
-        console.log(user, body)
+        if (!profile) {
+            return NextResponse.json({
+                success: false, error: "profile couldn't be found"
+            })
+        }
 
-        if (!user) {
+        if (!profile.user) {
             return NextResponse.json({
                 success: false, error: "user couldn't be found"
             })
         }
 
-        const userPass = user?.password
+        console.log(profile.user, body)
+
+        const userPass = profile.user.password
         const passwordVerified = await bcrypt.compare(body.password, userPass!)
 
         if (!passwordVerified) {
@@ -32,9 +39,9 @@ export async function POST(req: NextRequest) {
             })
         }
 
-        console.log("user is now logged into: " + user.name)
+        console.log("user is now logged into: " + profile.name)
             
-        const token = await createToken(user.id)
+        const token = await createToken(profile.user.id)
         const cookie = await cookies()
         cookie.set('auth_token', token, {
             httpOnly: true,
@@ -45,11 +52,11 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({
             success: true,
-            userId: user.id
+            userId: profile.user.id
         })
 
     } catch (error) {
-        console.log("error")
+        console.log("error: " + error)
 
         return NextResponse.json({
             success: false,

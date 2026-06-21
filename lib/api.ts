@@ -27,6 +27,11 @@ export async function login(payload: _loginData) {
             })
         }
 
+        const params = new URLSearchParams(window.location.search)
+        const redirect = params.get('redirect') || '/'
+        
+        window.location.href = redirect
+
         return NextResponse.json({
             success: true
         })
@@ -49,34 +54,46 @@ export async function register(payload: _registrationData) {
 
         const data = await res.json()
 
-        if (data.success) {
-            console.log("YOOO WE GOT IT, SETTING AUTH_TOKEN")
-            return data
-        } else {
+        if (!data.success) {
             console.log("error.")
+
+            return NextResponse.json({
+                success: false,
+                error: "well shit idk"
+            })
         }
+
+        console.log(data)
+
+        window.location.href = '/'
+
+        return data
     } catch (error: any) {
         console.log("couldn't register user: " + error.message)
     }
 }
 
+// server sided?
+
 export async function getProfile(payload: _profileGetInput) {
-    console.log("getting profile: " + payload.handle)
+    let handle = payload.handle
+
+    if (handle.startsWith('@')) {
+        handle = handle.slice(1)
+    }
 
     try {
-        
-        const res = fetch('/api/profiles', {
-            method: "GET",
+        const res = await fetch(`${process.env.RELATIVE_URL}/api/profiles?handle=${handle}`, {
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
         })
-
-        if (!res.success) {
-            console.log("error getting profile")
-        }
-
-        return res.profile
+        
+        // console.log("fetch response:", res)
+        
+        const data = await res.json()
+        console.log("data:", data)
+        
+        return data.profile
     } catch (error) {
-        console.log("couldn't get profile for handle... " + payload.handle)
+        console.log("couldn't get profile for handle... " + error)
     }
 }

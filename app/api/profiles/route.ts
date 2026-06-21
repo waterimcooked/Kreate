@@ -3,8 +3,10 @@ import { _profileGetInput } from "@/lib/types";
 import { prisma } from "@/lib/prisma"
 
 export async function GET(req: NextRequest) {
-    const body: _profileGetInput = await req.json()
-    const handle = body.handle
+    const { searchParams } = new URL(req.url)
+    let handle = searchParams.get('handle')
+
+    console.log("yooo whats up from the profiles api " + req)
 
     if (!handle) {
         console.log("no handle!")
@@ -20,6 +22,8 @@ export async function GET(req: NextRequest) {
             { where: { handle: handle } }
         )
 
+        console.log(profile)
+
         if (!profile) {
             console.log("couldn't find profile for handle: " + handle)
         }
@@ -29,7 +33,7 @@ export async function GET(req: NextRequest) {
             profile: profile
          })
     } catch (error) {
-        console.log("error!")
+        console.log("error!" + error)
 
         return {
             success: false,
