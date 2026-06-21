@@ -12,14 +12,14 @@ export default function AppNavbar(
     } : _AppProps) {
         
     return (
-       <div className="fixed top-0 left-18 right-0 h-28 bg-white flex flex-col items-center p-4 shadow z-10 ">
+       <div className="fixed top-0 left-18 right-0 h-18 bg-white flex flex-col items-center p-4 shadow z-10 ">
                 <SearchBar
                 placeholder="searching for something else?"
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
                 />
 
-                <div className="flex justify-start items-start w-full">
+                {/* <div className="flex justify-start items-start w-full">
                     <Button className="m-2 p-2 pl-8 pr-8 rounded-xl bg-gray-200 font-outfit">
                         Art
                     </Button>
@@ -43,7 +43,7 @@ export default function AppNavbar(
                     <Button className="m-2 p-2 pl-8 pr-8 rounded-xl bg-gray-200 font-outfit">
                         Illustration
                     </Button>
-                </div>
+                </div> */}
             </div> 
     )
 }

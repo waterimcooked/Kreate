@@ -22,9 +22,10 @@ export default function LoginPage() {
     }
 
     async function handleLogin() {
-        const res = login({handle, password})
+        const res = await login({handle, password})
 
-        if (res.success) {
+        const data = res.json()
+        if (data.success) {
             console.log("successfully logged in")
         } else {
             console.log("error.")
@@ -32,7 +33,7 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex flex-col justify-center w-dvw h-screen">
+        <div className="flex flex-col justify-center items-center w-full h-screen">
             <div className="flex flex-col justify-center items-center h-full w-full" id="Main">
                 <h1 className="font-outfit text-mocha-500 mt-8 text-shadow-black/40">
                     log into kreate right now please

@@ -21,7 +21,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                 />
-                <div className="flex-1 ml-18 mt-28">
+                <div className="flex-1 ml-18 mt-18">
                     {children}
                 </div>
             </main>
