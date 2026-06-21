@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { _loginData, _registrationData } from "./types"
+import { _loginData, _registrationData, _profileGetInput } from "./types"
 
 export async function logout() {
     try {
@@ -57,5 +57,26 @@ export async function register(payload: _registrationData) {
         }
     } catch (error: any) {
         console.log("couldn't register user: " + error.message)
+    }
+}
+
+export async function getProfile(payload: _profileGetInput) {
+    console.log("getting profile: " + payload.handle)
+
+    try {
+        
+        const res = fetch('/api/profiles', {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        })
+
+        if (!res.success) {
+            console.log("error getting profile")
+        }
+
+        return res.profile
+    } catch (error) {
+        console.log("couldn't get profile for handle... " + payload.handle)
     }
 }

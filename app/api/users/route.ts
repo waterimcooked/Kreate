@@ -22,7 +22,7 @@ async function doubleEmailCheck(email: string) {
 }
 
 async function doubleHandleCheck(handle: string) {
-  const user = await prisma.users.findUnique({
+  const user = await prisma.profiles.findUnique({
     where: { handle: handle }
   })
 
@@ -123,10 +123,16 @@ export async function POST(req: NextRequest) { // create new
 
       const user = await prisma.users.create({
         data: {
-            handle: body.handle,
-            name: body.name,
             email: body.email,
             password: hashedPassword
+        }
+      })
+
+      const profile = await prisma.profiles.create({
+        data: {
+          user_id: user.id,
+          handle: body.handle,
+          name: body.name
         }
       })
 
@@ -139,7 +145,7 @@ export async function POST(req: NextRequest) { // create new
         maxAge: 7 * 24 * 60 * 60
       })
 
-      console.log("created a token and set for the user")
+      console.log("created a token and set for the user AND created a user id")
 
       return NextResponse.json({
         success: true,

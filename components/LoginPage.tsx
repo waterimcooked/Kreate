@@ -41,7 +41,7 @@ export default function LoginPage() {
                 <div className="flex justify-center w-168 h-102 bg-mocha-600 rounded shadow mt-8 p-4" id="login thing">
                     <div className="flex flex-col h-full w-150 mr-2" id="left">
                         <div className="w-full h-24 p-4" id="email-part">
-                            <h1 className="font-outfit text-mocha-900">Email or Username <span className="text-mocha-200">*</span> </h1>
+                            <h1 className="font-outfit text-mocha-900">Email or Handle <span className="text-mocha-200">*</span> </h1>
                             <input type="text" value={handle} onChange={handleHandle} className="w-full bg-mocha-400 rounded-lg p-2 font-outfit" name="user" />
                         </div>
 

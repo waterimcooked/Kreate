@@ -3,6 +3,8 @@
 import { table } from "console"
 import { Dispatch, SetStateAction } from "react"
 
+// component related
+
 export type _SearchBar = {
     placeholder?: string,
     className?: string,
@@ -71,6 +73,14 @@ export type _CreatorCard = {
 }
 
 // api related
+
+export type _profileGetInput = {
+    handle: string,
+}
+
+export type _profileGetOutput = {
+    
+}
 
 export type _registrationData = {
     handle: string,
