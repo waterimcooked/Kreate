@@ -136,7 +136,7 @@ export async function POST(req: NextRequest) { // create new
         }
       })
 
-      const token = await createToken(user.id)
+      const token = await createToken(user.id, profile.id)
       const cookie = await cookies()
       cookie.set('auth_token', token, {
         httpOnly: true,
@@ -153,8 +153,6 @@ export async function POST(req: NextRequest) { // create new
       }, {
         status: 201,
       })
-
-
     } catch (error) {
         console.log("error, couldn't register this user lmao: " + error)
 

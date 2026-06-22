@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 
         console.log("user is now logged into: " + profile.name)
             
-        const token = await createToken(profile.user.id)
+        const token = await createToken(profile.user.id, profile.id)
         const cookie = await cookies()
         cookie.set('auth_token', token, {
             httpOnly: true,

@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Button from "./Button"
 import { useRouter } from "next/navigation";
-import { logout } from "@/lib/api";
+import { logout, getTokenData } from "@/lib/api";
 import { useState } from "react";
 import { useRef } from "react";
 
@@ -34,6 +34,13 @@ export default function Sidebar(
             timeoutRef.current = null
         }
         setExpanded(false)
+    }
+
+    async function handleProfile() {
+        let data = await getTokenData()
+        let handle = data.profile.handle
+
+        goTo(`/@${handle}`)
     }
 
     return (
@@ -74,7 +81,7 @@ export default function Sidebar(
                     </h1>
                 </Button>
 
-                <Button className={`flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={() => {goTo("/profile")}}>
+                <Button className={`flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={handleProfile}>
                     <img src={"/profile.svg"} alt="profile" className={`absolute transition-all duration-250 ${expanded ? `-translate-x-16` : `translate-x-0`}`} width={24} height={24} />
                     <h1 className={`absolute transition-all duration-125 font-outfit ${expanded ? `opacity-100` : `opacity-0`}`}>
                         ~ Profile

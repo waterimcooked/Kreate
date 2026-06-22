@@ -97,3 +97,13 @@ export async function getProfile(payload: _profileGetInput) {
         console.log("couldn't get profile for handle... " + error)
     }
 }
+
+export async function getTokenData() {
+    try {
+        const res = await fetch('/api/profiles/me')
+        const data = await res.json()
+        return data
+    } catch (error) {
+        console.error(error)
+  }
+}

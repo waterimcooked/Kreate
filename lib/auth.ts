@@ -22,9 +22,9 @@ async function verifyEmail(email: string) {
   }
 }
 
-export async function createToken(userId : string) {
+export async function createToken(userId : string, profileId : string) {
     const token = jwt.sign(
-        { userId }, 
+        { userId, profileId }, 
         process.env.JWT_SECRET!, 
         { expiresIn: process.env.JWT_EXPIRATION_DATE || '7d' }
     )
@@ -34,15 +34,15 @@ export async function createToken(userId : string) {
     return token    
 }
 
-export async function verifyToken(token : string) {
+export function verifyToken(token : string) {
     if (!process.env.JWT_SECRET) {
     throw new Error('JWT_SECRET not found')
   }
   
   try {
-    const isVerified = jwt.verify(token, process.env.JWT_SECRET)
-    return { success: true }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    return { success: true, userId: decoded.userId, profileId: decoded.profileId }
   } catch (err) {
-    return { success: false }
+    return { success: false, token: null }
   }
 }
