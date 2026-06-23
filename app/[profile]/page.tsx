@@ -17,6 +17,6 @@ export default async function Profile({ params }: { params: { profile: string } 
     // }
 
     return (
-        <ProfilePage/>
+        <ProfilePage profileData={""}/>
     )
 }

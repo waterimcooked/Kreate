@@ -40,7 +40,13 @@ export function verifyToken(token : string) {
   }
   
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const decoded = jwt.verify(token, process.env.JWT_SECRET) as {
+      userId: string
+      profileId: string
+      iat: number
+      exp: number
+    }
+
     return { success: true, userId: decoded.userId, profileId: decoded.profileId }
   } catch (err) {
     return { success: false, token: null }
