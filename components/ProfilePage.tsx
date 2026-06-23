@@ -17,25 +17,13 @@ export default function ProfilePage({ profileData }: { profileData: any }) {
                     </div>
                 </div>
 
-                <div className="flex flex-row mt-16 p-16 max-w-7xl mx-auto px-4" id="INFORMATION">
+                <div className="flex flex-row mt-8 p-16 max-w-7xl mx-auto px-4" id="INFORMATION">
                     <div className="w-1/2 p-4 m-4" id="LEFT SIDE">
                         
                         <h1 className="text-3xl font-outfit">Water</h1>
                         <h2 className="text-lg text-mocha-800/75 font-outfit">@water</h2>
 
                         <h3 className="text-sm text-mocha-900/75 font-outfit mt-4">i'm water, and i create character models, environment design, game assets, etc. contact me!</h3>
-
-                        <div className="mt-4 pt-4" id="SPECIALTIES MAYBE">
-                            <h1 className="font-sora text-mocha-800/50"> specialties - </h1>
-                            <div className="flex flex-wrap p-2">
-
-                                <ProfileSpecialty specialty="Web Development" className="bg-mocha-400"/>
-                                <ProfileSpecialty specialty="just more web dev" className="bg-mocha-400"/>
-                                <ProfileSpecialty specialty="i hate shcool" className="bg-mocha-400"/>
-                                <ProfileSpecialty specialty="i'd rather make this" className="bg-mocha-400"/>
-                                <ProfileSpecialty specialty="than do allat" className="bg-mocha-400"/>
-                            </div>
-                        </div>
 
                         <div className="mt-4 pt-4" id="SOCIAL STATS">
                             <div className="flex flex-row gap-6">
@@ -53,6 +41,18 @@ export default function ProfilePage({ profileData }: { profileData: any }) {
                                 </div>
                             </div>
                         </div>
+
+                        <div className="mt-4 pt-4" id="SPECIALTIES MAYBE">
+                            <h1 className="font-sora text-mocha-800/50"> specialties - </h1>
+                            <div className="flex flex-wrap p-2">
+
+                                <ProfileSpecialty specialty="Web Development" className="bg-mocha-400"/>
+                                <ProfileSpecialty specialty="just more web dev" className="bg-mocha-400"/>
+                                <ProfileSpecialty specialty="i hate shcool" className="bg-mocha-400"/>
+                                <ProfileSpecialty specialty="i'd rather make this" className="bg-mocha-400"/>
+                                <ProfileSpecialty specialty="than do allat" className="bg-mocha-400"/>
+                            </div>
+                        </div>
                     </div>
 
                     
@@ -64,6 +64,13 @@ export default function ProfilePage({ profileData }: { profileData: any }) {
                                 <ProfilePin/>
                                 <ProfilePin/>
                                 <ProfilePin/>
+                            </div>
+                        </div>
+
+                        <div className="mt-2" id="OTHERS">
+                            <h1 className="font-sora text-mocha-800/50">other works -</h1>
+                            <div className="grid grid-cols-3 mt-4">
+
                             </div>
                         </div>
                     </div>
