@@ -53,42 +53,44 @@ export default function Sidebar(
                     <img src={"/kreate-logo-1.png"} alt="home" width={48} height={48} />
                 </Button>
 
-                <Button className={`flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={() => {goTo("/")}}>
+                <div className="w-1/2 rounded-lg ml-2 mr-2 bg-gray-500/25 h-1"></div>
+
+                <Button className={`flex justify-center items-center w-12 h-12 mt-2 mb-1 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={() => {goTo("/")}}>
                     <img src={"/home.svg"} alt="home" className={`absolute transition-all duration-250 ${expanded ? `-translate-x-16` : `translate-x-0`}`} width={24} height={24} />
                     <h1 className={`absolute transition-all duration-250 font-outfit ${expanded ? `opacity-100` : `opacity-0`}`}>
                         ~ Home
                     </h1>
                 </Button>
 
-                <Button className={`flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={() => {goTo("/browse")}}>
+                <Button className={`flex justify-center items-center w-12 h-12 m-1 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={() => {goTo("/browse")}}>
                     <img src={"/search.svg"} alt="browse" className={`absolute transition-all duration-250 ${expanded ? `-translate-x-16` : `translate-x-0`}`} width={24} height={24} />
                     <h1 className={`absolute transition-all duration-125 font-outfit ${expanded ? `opacity-100` : `opacity-0`}`}>
                         ~ Browse
                     </h1>
                 </Button>
 
-                <Button className={`flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={() => {goTo("/upload")}}>
+                <Button className={`flex justify-center items-center w-12 h-12 m-1 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={() => {goTo("/upload")}}>
                     <img src={"/upload.svg"} alt="upload" className={`absolute transition-all duration-250 ${expanded ? `-translate-x-16` : `translate-x-0`}`} width={24} height={24} />
                     <h1 className={`absolute transition-all duration-125 font-outfit ${expanded ? `opacity-100` : `opacity-0`}`}>
                         ~ Upload
                     </h1>
                 </Button>
 
-                <Button className={`flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={() => {goTo("/messages")}}>
+                <Button className={`flex justify-center items-center w-12 h-12 m-1 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={() => {goTo("/messages")}}>
                     <img src={"/messages.svg"} alt="messages" className={`absolute transition-all duration-250 ${expanded ? `-translate-x-16` : `translate-x-0`}`} width={24} height={24} />
                     <h1 className={`absolute transition-all duration-125 font-outfit ${expanded ? `opacity-100` : `opacity-0`}`}>
                         ~ Messages
                     </h1>
                 </Button>
 
-                <Button className={`flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={handleProfile}>
+                <Button className={`flex justify-center items-center w-12 h-12 m-1 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={handleProfile}>
                     <img src={"/profile.svg"} alt="profile" className={`absolute transition-all duration-250 ${expanded ? `-translate-x-16` : `translate-x-0`}`} width={24} height={24} />
                     <h1 className={`absolute transition-all duration-125 font-outfit ${expanded ? `opacity-100` : `opacity-0`}`}>
                         ~ Profile
                     </h1>
                 </Button>
 
-                <Button className={`flex justify-center items-center w-12 h-12 m-3 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={logout}>
+                <Button className={`flex justify-center items-center w-12 h-12 m-1 hover:bg-gray-200 rounded-lg transition-all duration-200 ${expanded ? 'w-48' : 'w-12'}`} onClick={logout}>
                     <h1 className={`absolute transition-all duration-125 font-outfit ${expanded ? `opacity-100` : `opacity-0`}`}>
                         ~ Log Out
                     </h1>
