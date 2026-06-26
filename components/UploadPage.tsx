@@ -45,12 +45,12 @@ export default function UploadPage() {
             <div className="flex flex-row w-full h-auto p-4" id="WORK INFORMATION">
                 <div className="flex flex-col w-full h-auto p-4">
                     <div className="mt-4">
-                        <h1 className="font-outfit text-2xl text-gray-500/75" id="title">title -</h1>
+                        <h1 className="font-outfit text-lg text-gray-500/75" id="title">title -</h1>
                         <input type="text" className="w-full border-2 border-gray-500/50 rounded-lg p-2 mt-2 font-outfit" placeholder="give a unique title that will WOW the users" value={title} onChange={handleTitle} />
                     </div>
 
                     <div className="mt-4">
-                        <h1 className="font-outfit text-2xl text-gray-500/75" id="title">description -</h1>
+                        <h1 className="font-outfit text-lg text-gray-500/75" id="title">description -</h1>
                         <textarea name="" className="w-full border-2 border-gray-500/50 rounded-lg p-2 mt-2 font-outfit" placeholder="what's this even about?" id=""></textarea>
                         <p className="font-outfit text-xs text-gray-500/40">
                             max characters: 100, make it count
@@ -59,11 +59,11 @@ export default function UploadPage() {
 
                     <div className="flex w-full h-auto p-4">
                         <div className="m-2 w-full">
-                            <h1 className="font-outfit text-2xl text-gray-500/75">category -</h1>
+                            <h1 className="font-outfit text-lg text-gray-500/75">category -</h1>
                         </div>
 
                         <div className="m-2 w-full">
-                            <h1 className="font-outfit text-2xl text-gray-500/75">
+                            <h1 className="font-outfit text-lg text-gray-500/75">
                                 visiblity -
                             </h1>
 
