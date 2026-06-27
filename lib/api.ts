@@ -1,3 +1,5 @@
+'use client'
+
 import { NextResponse } from "next/server"
 import { _loginData, _registrationData, _profileGetInput } from "./types"
 
@@ -73,8 +75,6 @@ export async function register(payload: _registrationData) {
     }
 }
 
-// server sided?
-
 export async function getProfile(payload: _profileGetInput) {
     let handle = payload.handle
 
@@ -83,7 +83,7 @@ export async function getProfile(payload: _profileGetInput) {
     }
 
     try {
-        const res = await fetch(`${process.env.RELATIVE_URL}/api/profiles?handle=${handle}`, {
+        const res = await fetch(`/api/profiles?handle=${handle}`, {
             headers: { "Content-Type": "application/json" },
         })
         
@@ -98,9 +98,9 @@ export async function getProfile(payload: _profileGetInput) {
     }
 }
 
-export async function getTokenData() {
+export async function getMyProfile() {
     try {
-        const res = await fetch('/api/profiles/me')
+        const res = await fetch(`/api/profiles/me`)
         const data = await res.json()
         return data
     } catch (error) {

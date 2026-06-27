@@ -79,7 +79,11 @@ export type _profileGetInput = {
 }
 
 export type _profileGetOutput = {
-    handle: string, avatar: string, bio: string, verified: boolean, name: string
+    handle: string, 
+    avatar: string, 
+    bio: string, 
+    verified: boolean, 
+    name: string
 }
 
 export type _registrationData = {

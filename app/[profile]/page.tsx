@@ -1,4 +1,4 @@
-import { getProfile } from "@/lib/api"
+import { getProfile } from "@/lib/data"
 import NotFound from "@/components/not-found"
 import ProfilePage from "@/components/ProfilePage"
 

@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Button from "./Button"
 import { useRouter } from "next/navigation";
-import { logout, getTokenData } from "@/lib/api";
+import { logout, getMyProfile } from "@/lib/api";
 import { useState } from "react";
 import { useRef } from "react";
 
@@ -37,7 +37,7 @@ export default function Sidebar(
     }
 
     async function handleProfile() {
-        let data = await getTokenData()
+        let data = await getMyProfile()
         if (!data.profile) {
             return goTo('/login')
         }
