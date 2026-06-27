@@ -2,17 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Arimo, Nunito } from "next/font/google";
 import "./globals.css";
 
-// HARC CODED
-
-const isLoggedIn : boolean = true
-
 // COMPONENTS
 
-import AppNavbar from "@/components/AppNavbar";
-import LandingNavbar from "@/components/LandingNavbar";
-import Sidebar from "@/components/Sidebar";
-import LandingPage from "@/components/LandingPage";
 import ClientLayout from "@/components/ClientLayout";
+import { getMyProfile } from "@/lib/data";
 
 // GO
 
@@ -43,14 +36,13 @@ export const metadata: Metadata = {
   description: "Show your creativity off.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
 
-  // const [searchInput, setSearchInput] = useState("")
-  // const [selectedCategory, setSelectedCategory] = useState("")
+  const userData = await getMyProfile()
 
   return (
     <html
@@ -59,7 +51,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
           <main>
-            <ClientLayout>{children}</ClientLayout>
+            <ClientLayout userData={userData}>{children}</ClientLayout>
           </main>
       </body>
     </html>
