@@ -38,6 +38,10 @@ export default function Sidebar(
 
     async function handleProfile() {
         let data = await getTokenData()
+        if (!data.profile) {
+            return goTo('/login')
+        }
+
         let handle = data.profile.handle
 
         goTo(`/@${handle}`)

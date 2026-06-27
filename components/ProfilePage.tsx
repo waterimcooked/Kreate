@@ -1,3 +1,5 @@
+'use client'
+
 import { _profileGetOutput } from "@/lib/types";
 import { profile } from "console";
 import { ProfileSpecialty } from "./ProfileSpecialty";
