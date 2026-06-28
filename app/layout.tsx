@@ -46,8 +46,6 @@ export default async function RootLayout({
   const res = await getMyProfile()
   const profileData = res.profile
 
-  console.log(profileData, " IM LOGGINED YESSS")
-
   return (
     <html
       lang="en"

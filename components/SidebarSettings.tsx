@@ -7,9 +7,12 @@ import { logout } from "@/lib/api"
 import { useRouter } from "next/navigation"
 
 import { _profileData } from "@/lib/types"
+import { profile } from "console"
 
 export default function SidebarSettings({profileData} : {profileData: _profileData}) {
     const router = useRouter()
+
+    console.log(profileData)
 
     function handleLogout() {
         logout()
@@ -23,7 +26,7 @@ export default function SidebarSettings({profileData} : {profileData: _profileDa
             <div className="flex flex-col w-full h-full p-4" id="main of settings">
                 <div className="flex flex-row p-2" id="profile info">
                     <div className="w-12 h-12 rounded-full bg-cyan-800" id="pfp"></div>
-                    
+
                     <div className="flex flex-col justify-center ml-2">
                         <h1 className="text-sm font-outfit">{profileData.name}</h1>
                         <h2 className="text-xs font-outfit text-gray-500">{profileData.handle}</h2>

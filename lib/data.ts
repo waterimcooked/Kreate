@@ -1,15 +1,18 @@
 "use server"
 
-import { verifyToken } from "@/lib/auth";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { createToken } from '@/lib/auth'
+import { verifyToken } from "@/lib/auth";
+
 import bcrypt from 'bcryptjs'
 
 import { NextRequest, NextResponse } from "next/server";
 
-import { _registrationData } from "./types";
+import { _profileData, _registrationData } from "./types";
 import { Payload } from "@prisma/client/runtime/client";
+import { stringify } from "querystring";
+import jwt from "jsonwebtoken";
 
 // helpers
 
@@ -219,6 +222,26 @@ export async function getProfile({handle} : {handle: string}) {
     }
 }
 
+export async function updateProfile({ profileId, profileData } :  { profileId: string, profileData: _profileData }) {
+    console.log(profileData)
+
+    try {
+        const res = await prisma.profiles.update({
+            where: { id: profileId },
+            data: {
+                name: profileData.name,
+                handle: profileData.handle,
+                bio: profileData.bio,
+                avatar: profileData.avatar,
+            }
+        })
+
+        return { success: true, data: res }
+    } catch (error) {
+        return { error: "error for some reason " + error, success: false }
+    }
+}
+
 export async function getMyProfile() {
     const cookieStore = await cookies()
     const token = cookieStore.get('auth_token')?.value
@@ -228,7 +251,7 @@ export async function getMyProfile() {
     }
 
     try {
-        const { profileId } = verifyToken(token)
+        const { profileId } = await verifyToken(token)
 
         const profile = await prisma.profiles.findUnique({
             where: { id: profileId }
@@ -238,7 +261,7 @@ export async function getMyProfile() {
             return { success: false, error: 'profile not found', status: 404 }
         }
 
-        return { profile: profile, success: false }
+        return { profile: profile, success: true }
     } catch (error) {
         return { error: 'invalid token', status: 401 }
     }

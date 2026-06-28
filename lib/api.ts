@@ -1,7 +1,7 @@
 'use client'
 
 import { NextResponse } from "next/server"
-import { _loginData, _registrationData, _profileGetInput } from "./types"
+import { _loginData, _registrationData, _profileGetInput, _profileData } from "./types"
 
 export async function logout() {
     try {
@@ -72,6 +72,20 @@ export async function register(payload: _registrationData) {
         return data
     } catch (error: any) {
         console.log("couldn't register user: " + error.message)
+    }
+}
+
+export async function saveProfile({ payload } : { payload: _profileData }) {
+    try {
+        const res = await fetch("/api/profiles", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({payload})
+        })
+        
+        return { success: true }
+    } catch (error) {
+        return { success: false, error: error }
     }
 }
 

@@ -1,43 +1,32 @@
 import { NextResponse, NextRequest } from "next/server";
 import { _profileGetInput } from "@/lib/types";
-import { prisma } from "@/lib/prisma"
+
+import { updateProfile } from "@/lib/data";
+import { verifyToken } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
-    const { searchParams } = new URL(req.url)
-    let handle = searchParams.get('handle')
+    
+}
 
-    console.log("yooo whats up from the profiles api " + req)
-
-    if (!handle) {
-        console.log("no handle!")
-
-        return NextResponse.json({
-            success: false,
-            reason: "handle is required"
-        }, { status: 400 })
+export async function PATCH(req: NextRequest) {
+    const token = req.cookies.get('auth_token')?.value
+    if (!token) {
+        return { success: false, error: 'not authenticated to do this action!' }
     }
 
-    try {
-        const profile = await prisma.profiles.findUnique(
-            { where: { handle: handle } }
-        )
-
-        console.log(profile)
-
-        if (!profile) {
-            console.log("couldn't find profile for handle: " + handle)
-        }
-
-        return NextResponse.json({ 
-            success: true,
-            profile: profile
-         })
-    } catch (error) {
-        console.log("error!" + error)
-
-        return {
-            success: false,
-            error: error
-        }
+    const tokenRes = await verifyToken(token)
+    if (!tokenRes.success) {
+        return { success: false, error: 'token has already expired!' }
     }
+
+    const body = await req.json()
+    let profileData = body.payload
+
+    console.log("success, updating the thing now", profileData)
+
+    const res = await updateProfile({ profileId: tokenRes.profileId!, profileData: profileData })
+
+    console.log(res)
+
+    return NextResponse.json({ success: true, result: res })
 }
