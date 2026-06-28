@@ -6,6 +6,7 @@ import "./globals.css";
 
 import ClientLayout from "@/components/ClientLayout";
 import { getMyProfile } from "@/lib/data";
+import { _profileData } from "@/lib/types";
 
 // GO
 
@@ -42,7 +43,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const userData = await getMyProfile()
+  const res = await getMyProfile()
+  const profileData = res.profile
+
+  console.log(profileData, " IM LOGGINED YESSS")
 
   return (
     <html
@@ -51,7 +55,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col">
           <main>
-            <ClientLayout userData={userData}>{children}</ClientLayout>
+            <ClientLayout profileData={profileData}>{children}</ClientLayout>
           </main>
       </body>
     </html>

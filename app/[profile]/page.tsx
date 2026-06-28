@@ -8,7 +8,7 @@ export default async function Profile({ params }: { params: { profile: string } 
 
     console.log(profile)
 
-    const profileData = await getProfile({ handle: profile, })
+    const profileData = await getProfile({ profile })
     
     if (!profileData) {
         return (

@@ -2,12 +2,19 @@
 
 import ProfileIcon from "./ProfileIcon"
 import Button from "./Button"
-import { logout } from "@/lib/api"
 
+import { logout } from "@/lib/api"
 import { useRouter } from "next/navigation"
 
-export default function SidebarSettings({userData} : {userData: any}) {
+import { _profileData } from "@/lib/types"
+
+export default function SidebarSettings({profileData} : {profileData: _profileData}) {
     const router = useRouter()
+
+    function handleLogout() {
+        logout()
+        router.push('/login')
+    }
 
     return (
         <div className="w-80 h-full shadow z-2 bg-white/90 p-4 flex flex-col items-center">
@@ -16,9 +23,10 @@ export default function SidebarSettings({userData} : {userData: any}) {
             <div className="flex flex-col w-full h-full p-4" id="main of settings">
                 <div className="flex flex-row p-2" id="profile info">
                     <div className="w-12 h-12 rounded-full bg-cyan-800" id="pfp"></div>
+                    
                     <div className="flex flex-col justify-center ml-2">
-                        <h1 className="text-sm font-outfit">{userData.name}</h1>
-                        <h2 className="text-xs font-outfit text-gray-500">{userData.handle}</h2>
+                        <h1 className="text-sm font-outfit">{profileData.name}</h1>
+                        <h2 className="text-xs font-outfit text-gray-500">{profileData.handle}</h2>
                     </div>
                 </div>
 
@@ -50,7 +58,7 @@ export default function SidebarSettings({userData} : {userData: any}) {
                         <h1 className="font-outfit text-xs text-gray-500">view all settings</h1>
                     </Button>
 
-                    <Button className="w-full h-8 bg-red-400 shadow rounded my-2" onClick={logout}>
+                    <Button className="w-full h-8 bg-red-400 shadow rounded my-2" onClick={() => {handleLogout}}>
                         <h1 className="font-outfit text-xs">log out</h1>
                     </Button>
                 </div>

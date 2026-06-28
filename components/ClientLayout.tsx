@@ -6,15 +6,15 @@ import { useState, Dispatch, SetStateAction } from "react"
 
 import Sidebar from "./Sidebar"
 import AppNavbar from "./AppNavbar"
-import { _AppProps } from "@/lib/types"
+import { _AppProps, _profileData } from "@/lib/types"
 
-export default function ClientLayout({ children, userData }: { children: React.ReactNode, userData: any }) {
+export default function ClientLayout({ children, profileData }: { children: React.ReactNode, profileData: _profileData }) {
     const [searchInput, setSearchInput] = useState<string>("")
     const [selectedCategory, setSelectedCategory] = useState("")
 
     return (
         <div className="flex">
-            <Sidebar userData={userData} />
+            <Sidebar profileData={profileData} />
             <main className="flex-1">
                 <AppNavbar
                     searchInput={searchInput}

@@ -72,17 +72,21 @@ export type _CreatorCard = {
     }[]
 }
 
-// api related
+// data related
 
 export type _profileGetInput = {
     handle: string,
 }
 
-export type _profileGetOutput = {
-    handle: string, 
-    avatar: string, 
-    bio: string, 
-    verified: boolean, 
+export type userData = {
+    handle: string,
+}
+
+export type _profileData = {
+    handle: string,
+    avatar: string,
+    bio: string,
+    verified: boolean,
     name: string
 }
 

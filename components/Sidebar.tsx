@@ -3,14 +3,14 @@
 import Image from "next/image"
 import Button from "./Button"
 import { useRouter } from "next/navigation";
-import { getMyProfile } from "@/lib/api";
 import { useState } from "react";
 import { useRef } from "react";
 import SidebarSettings from "./SidebarSettings";
+import { _profileData } from "@/lib/types";
 
 export default function Sidebar( 
-    { onMouseOver, onMouseLeave, userData }: 
-    { onMouseOver?: Function, onMouseLeave?: Function, userData: any }
+    { onMouseOver, onMouseLeave, profileData }: 
+    { onMouseOver?: Function, onMouseLeave?: Function, profileData: _profileData }
  ) {
     const [expanded, setExpanded] = useState(false)
     const [settingsOpened, setSettingsOpened] = useState(false)
@@ -36,11 +36,11 @@ export default function Sidebar(
     }
 
     async function handleProfile() {
-        if (!userData.handle) {
+        if (!profileData.handle) {
             goTo('/login')
         }
 
-        let handle = userData.handle
+        let handle = profileData.handle
         goTo(`/@${handle}`)
     }
 
@@ -106,7 +106,7 @@ export default function Sidebar(
 
                 <div className={`fixed top-0 left-56 z-11 h-full bg-white transition-all duration-200 
                 ${settingsOpened ? 'opacity-100 pointer-events-auto translate-x-0' : 'opacity-0 pointer-events-none -translate-x-full'}`}>
-                    <SidebarSettings userData={userData}/>
+                    <SidebarSettings profileData={profileData}/>
                 </div>
             </div>
         </div>
