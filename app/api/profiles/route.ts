@@ -1,12 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
 import { _profileGetInput } from "@/lib/types";
 
-import { updateProfile } from "@/lib/data";
+import { updateProfile, uploadAvatar } from "@/lib/data";
 import { verifyToken } from "@/lib/auth";
-
-export async function GET(req: NextRequest) {
-    
-}
 
 export async function PATCH(req: NextRequest) {
     const token = req.cookies.get('auth_token')?.value
@@ -24,9 +20,10 @@ export async function PATCH(req: NextRequest) {
 
     console.log("success, updating the thing now", profileData)
 
-    const res = await updateProfile({ profileId: tokenRes.profileId!, profileData: profileData })
+    const uploadRes = await uploadAvatar({ file: profileData.avatar, profileId: tokenRes.profileId! })
+    const res = await updateProfile({ profileId: tokenRes.profileId!, profileData: { avatar: profileData.avatar.name, ... }})
 
-    console.log(res)
+    console.log(uploadRes, res)
 
     return NextResponse.json({ success: true, result: res })
 }

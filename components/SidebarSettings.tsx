@@ -12,8 +12,6 @@ import { profile } from "console"
 export default function SidebarSettings({profileData} : {profileData: _profileData}) {
     const router = useRouter()
 
-    console.log(profileData)
-
     function handleLogout() {
         logout()
         router.push('/login')
@@ -23,7 +21,8 @@ export default function SidebarSettings({profileData} : {profileData: _profileDa
         <div className="w-80 h-full shadow z-2 bg-white/90 p-4 flex flex-col items-center">
             <h1 className="text-2xl font-outfit">Settings</h1>
 
-            <div className="flex flex-col w-full h-full p-4" id="main of settings">
+            { profileData?  
+                <div className="flex flex-col w-full h-full p-4" id="main of settings">
                 <div className="flex flex-row p-2" id="profile info">
                     <div className="w-12 h-12 rounded-full bg-cyan-800" id="pfp"></div>
 
@@ -66,6 +65,27 @@ export default function SidebarSettings({profileData} : {profileData: _profileDa
                     </Button>
                 </div>
             </div>
+
+            :
+
+            <div className="flex flex-col p-4 w-full gap-4">
+                <h1 className="my-4 font-outfit text-lg text-gray-400 text-center">
+                    you aren't logged in!
+                </h1>
+
+                <Button className="rounded-lg bg-gray-400 p-2 w-full h-12" onClick={() => {router.push('/login')}}>
+                    <h1 className="text-white font-outfit">
+                        Login
+                    </h1>
+                </Button>
+
+                <Button className="rounded-lg bg-teal-600 p-2 w-full h-12" onClick={() => {router.push('/register')}}>
+                    <h1 className="text-white font-outfit">
+                        Register
+                    </h1>
+                </Button>
+            </div>
+        }
         </div>
     )
 }

@@ -4,14 +4,15 @@ import { _profileData } from "@/lib/types"
 import { saveProfile } from "@/lib/api"
 
 export default function SettingsProfileTab( { profileData } : { profileData: _profileData } ) {
-    const [ name, setName ] = useState(profileData.name)
-    const [ handle, setHandle ] = useState(profileData.handle)
-    const [ bio, setBio ] = useState(profileData.bio)
+    const [ name, setName ] = useState(profileData.name || '')
+    const [ handle, setHandle ] = useState(profileData.handle || '')
+    const [ bio, setBio ] = useState(profileData.bio || '')
+    const [ avatar, setAvatar ] = useState<File | null>(null)
 
     const originalData = {
-        name: profileData.name,
-        handle: profileData.handle,
-        bio: profileData.bio
+        name: profileData.name || '',
+        handle: profileData.handle || '',
+        bio: profileData.bio || ''
     }
 
     const [ changed, setChanged ] = useState(false)
@@ -43,8 +44,26 @@ export default function SettingsProfileTab( { profileData } : { profileData: _pr
     }
 
     function handleSave() {
-        saveProfile({ payload: { name, handle, bio } })
+        saveProfile({ payload: { name, handle, bio, avatar } })
     }
+
+    function handleAvatar(e: any) {
+        const file: File = e.target.files[0]
+
+        if (!file.type.startsWith('image/')) {
+            console.error('not an image')
+            return
+        }
+        
+        if (file.size > 5 * 1024 * 1024) {
+            console.error('file too large ~ max 5mb')
+            return
+        }
+
+        console.log("aight.")
+        setAvatar(file)
+    }
+
 
     return (
         <div className={`flex flex-col`}>
@@ -52,15 +71,24 @@ export default function SettingsProfileTab( { profileData } : { profileData: _pr
             <p className="font-outfit text-sm text-gray-500">
                 customize how your profile expresses itself
             </p>
-            <div className="flex flex-col mt-16">
+
+
+            { profileData?  
+
+                <div className="flex flex-col mt-16">
                 <div className="flex flex-col py-2 gap-2">
                     <h1 className="text-lg font-outfit text-gray-500">Profile Picture ~</h1>
                     <div className="flex flex-row">
                         <div className="w-20 h-20 rounded-full bg-mocha-400"/>
                         <div className="flex flex-col items-center mx-8 gap-2" id="customize">
-                            <Button className="bg-gray-400 rounded w-40 h-8">
-                                <h1 className="text-sm text-white font-outfit">Update</h1>
-                            </Button>
+                            <label className="flex justify-center items-center bg-gray-400 rounded w-40 h-8">
+                                <h1 className="text-sm text-white font-outfit">Change</h1>
+                                <input type="file"
+                                accept="image/*"
+                                className="w-full h-full hidden"
+                                onChange={handleAvatar}
+                                />
+                            </label>
                             <Button className="bg-red-400 rounded w-40 h-8">
                                 <h1 className="text-sm text-white font-outfit">Remove</h1>
                             </Button>
@@ -91,6 +119,14 @@ export default function SettingsProfileTab( { profileData } : { profileData: _pr
                     </Button>
                 </div>
             </div>
+
+            :
+
+            <div>
+                <h1>NOT LOGGED IN!</h1>
+            </div>
+        
+        }
         </div>
     )
 }

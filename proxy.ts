@@ -11,6 +11,7 @@ export function proxy(request: NextRequest) {
     }
      try {
         const { success } = verifyToken(token)
+
         if (!success) {
             return NextResponse.redirect(new URL('/login', request.url))
         }

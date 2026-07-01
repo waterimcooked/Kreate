@@ -6,8 +6,6 @@ export default async function Profile({ params }: { params: { profile: string } 
     let { profile } = await params
     profile = decodeURIComponent(profile)
 
-    console.log(profile)
-
     const profileData = await getProfile({ profile })
     
     if (!profileData) {

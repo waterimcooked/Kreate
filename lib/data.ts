@@ -6,13 +6,8 @@ import { createToken } from '@/lib/auth'
 import { verifyToken } from "@/lib/auth";
 
 import bcrypt from 'bcryptjs'
-
 import { NextRequest, NextResponse } from "next/server";
-
 import { _profileData, _registrationData } from "./types";
-import { Payload } from "@prisma/client/runtime/client";
-import { stringify } from "querystring";
-import jwt from "jsonwebtoken";
 
 // helpers
 
